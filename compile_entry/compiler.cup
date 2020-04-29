@@ -1,0 +1,98 @@
+package compiler;
+import UI.DiagramFactory;
+import org.eclipse.uml2.uml.*;
+
+parser code {:
+    public void report_error(String message, Object info) {
+        StringBuffer m = new StringBuffer("Error");
+		m.append (info.toString());
+        m.append(" : "+message);
+        System.err.println(m.toString());
+    }
+   
+    public void report_fatal_error(String message, Object info) {
+        report_error(message, info);
+        System.exit(1);
+    }
+
+	private DiagramFactory factory;
+    
+	public Model getModel () {
+		return factory.getModel();
+	}
+
+	private DiagramFactory getFactory () {
+		if (factory == null) factory = new DiagramFactory ();
+		return factory;
+	}
+
+:}
+
+
+terminal T_MODEL, COMPLEXCOMPONENT, COMPONENT, CONTAINS, O_PORT, INTERFACE, USE, REALIZE;
+terminal OPEN_CURLY, CLOSE_CURLY, OPEN_BRACKET, CLOSE_BRACKET, COMA;
+terminal USE_INTERFACE, REALIZE_INTERFACE;
+terminal String NAME;
+
+nonterminal Model;
+nonterminal	Declarations, Declaration;
+nonterminal ComplexComponent, OptionalContains, OptionalPorts, Components, Ports, Port;
+nonterminal Interfaces, Interface, Component, UseLinks, RealizeLinks;
+
+Model ::=	T_MODEL NAME:name {: getFactory().pushModel (name); :} Declarations {: getFactory().pop (); :}
+		;
+		
+Declarations::=
+			|	Declarations Declaration
+			;
+
+Declaration	::=	ComplexComponent
+			|	Component
+			|	Interface
+			|	Port
+			;
+
+ComplexComponent ::= COMPLEXCOMPONENT NAME:name {: getFactory().pushComponent(name); :}OPEN_CURLY OptionalContains OptionalPorts CLOSE_CURLY {: getFactory().pop (); :}
+					;
+
+OptionalContains ::= 												{: RESULT = null; :}
+                  | CONTAINS OPEN_BRACKET Components CLOSE_BRACKET
+                  ;
+
+OptionalPorts ::= 													{: RESULT = null; :}
+              | O_PORT OPEN_BRACKET Ports CLOSE_BRACKET
+              ;
+
+Components ::= Component
+            | Components COMA Component 
+            ;
+
+Ports ::= Port
+        | Ports COMA Port 
+        ;
+
+Port ::= NAME:name {:getFactory().addPort(name); :}
+		;
+		
+              
+Interfaces ::= Interface
+			| Interfaces COMA Interface
+			;
+			
+			
+Interface ::= INTERFACE NAME:name {:getFactory().addInterface(name); :}
+			| USE_INTERFACE NAME:name {:getFactory().addUseLink(name); :}
+			| REALIZE_INTERFACE NAME:name {:getFactory().addRealizeLink(name); :}
+			;
+
+Component ::= COMPONENT NAME:name {: getFactory().pushComponent(name); :} OPEN_CURLY UseLinks RealizeLinks CLOSE_CURLY {: getFactory().pop (); :}
+			| NAME:name {: getFactory().addComponentInto(name); :}
+			;
+			
+UseLinks ::=													{: RESULT = null; :}
+			| USE OPEN_BRACKET Interfaces CLOSE_BRACKET			
+			;
+			
+RealizeLinks ::= 												{: RESULT = null; :}
+			| REALIZE OPEN_BRACKET Interfaces CLOSE_BRACKET		
+			;

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_GY_7wEJVEeiUHondNubsBw" name="model">
+  <packageImport xmi:type="uml:PackageImport" xmi:id="_JYDG0EJVEeiit4PkanmA7w">
+    <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
+  </packageImport>
+  <packagedElement xmi:type="uml:Interface" xmi:id="_GZCYAEJVEeiUHondNubsBw" name="provided"/>
+  <packagedElement xmi:type="uml:Interface" xmi:id="_GZCYAUJVEeiUHondNubsBw" name="externalProvided"/>
+  <packagedElement xmi:type="uml:Interface" xmi:id="_GZCYAkJVEeiUHondNubsBw" name="interProvided"/>
+  <packagedElement xmi:type="uml:Interface" xmi:id="_GZCYA0JVEeiUHondNubsBw" name="realized"/>
+  <packagedElement xmi:type="uml:Component" xmi:id="_GZCYBEJVEeiUHondNubsBw" name="start">
+    <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="_GZCYBUJVEeiUHondNubsBw" client="_GZCYBEJVEeiUHondNubsBw" supplier="_GZCYAkJVEeiUHondNubsBw" contract="_GZCYAkJVEeiUHondNubsBw"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Usage" xmi:id="_GZCYBkJVEeiUHondNubsBw" client="_GY_7wEJVEeiUHondNubsBw" supplier="_GZCYAEJVEeiUHondNubsBw"/>
+  <packagedElement xmi:type="uml:Component" xmi:id="_GZCYB0JVEeiUHondNubsBw" name="internal">
+    <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="_GZCYCEJVEeiUHondNubsBw" client="_GZCYB0JVEeiUHondNubsBw" supplier="_GZCYA0JVEeiUHondNubsBw" contract="_GZCYA0JVEeiUHondNubsBw"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Usage" xmi:id="_GZCYCUJVEeiUHondNubsBw" client="_GZCYB0JVEeiUHondNubsBw" supplier="_GZCYAkJVEeiUHondNubsBw"/>
+  <packagedElement xmi:type="uml:Usage" xmi:id="_GZCYCkJVEeiUHondNubsBw" client="_GZCYB0JVEeiUHondNubsBw" supplier="_GZCYAUJVEeiUHondNubsBw"/>
+  <packagedElement xmi:type="uml:Component" xmi:id="_GZCYC0JVEeiUHondNubsBw" name="complexCompo">
+    <ownedAttribute xmi:type="uml:Port" xmi:id="_GZCYDEJVEeiUHondNubsBw" name="port1"/>
+    <ownedAttribute xmi:type="uml:Port" xmi:id="_GZCYDUJVEeiUHondNubsBw" name="port2"/>
+    <packagedElement xmi:type="uml:Component" xmi:id="_GZCYDkJVEeiUHondNubsBw" name="compoInterne1"/>
+    <packagedElement xmi:type="uml:Component" xmi:id="_GZCYD0JVEeiUHondNubsBw" name="compoInterne2"/>
+  </packagedElement>
+</uml:Model>

@@ -1,0 +1,26 @@
+Model model
+
+Interface provided
+Interface externalProvided
+Interface interProvided
+Interface realized
+
+Component start {
+	use[UseInterface provided]
+	realize[RealizeInterface interProvided]
+}
+
+Component internal{
+	use[UseInterface interProvided, UseInterface externalProvided]
+	realize[RealizeInterface realized]
+}
+
+ComplexComponent complexCompo{
+	contains[compoInterne1,compoInterne2]
+	port[port1,port2]
+}
+
+
+
+
+
